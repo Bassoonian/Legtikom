@@ -1,0 +1,211 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{xebolpie}
+\RequirePackage{xstring}
+
+\ProcessOptions\relax
+
+%First argument is PIE word in Connie Notation
+%Second argument is a list of options (to be separated by commas, tho not technically necessary)
+%%uvular: assumes k' k kv -> k q qʷ (default: ḱ k kʷ) (conflict: circumflex)
+%%circumflex: writes k' as k̂ (default ḱ) (conflict: uvular)
+%%glottal_trad: assumes t d dh -> t t' d (default: t d dʰ) (conflict: glottal_beekes)
+%%glottal_beekes: assumes t d dh -> t ˀt tʰ (default: t d dʰ) (conflict: glottal_trad)
+%%semivowels: writes y w as i̯ u̯ (default: y w)
+%%xh: writes xx as Hhₓ (default: H)
+%%h2: writes x4 and x@ as h₂
+\newcommand\SubStep[2]{\expandafter\StrSubstitute\expandafter{\apple}{#1}{#2}[\apple]}%
+
+\newcommand\PIE[2]{%
+    \noexpandarg%
+    %input stuff
+    \StrSubstitute{#1}{``}{"}[\apple]%
+    \SubStep{''}{"}%
+    %
+    %long accented vowels
+    \SubStep{"a:}{ā́}%
+    \SubStep{"e:}{ḗ}%
+    \SubStep{"i:}{ī́}%
+    \SubStep{"o:}{ṓ}%
+    \SubStep{"u:}{ū́}%
+    %
+    %long unaccented vowels
+    \SubStep{a:}{ā}%
+    \SubStep{e:}{ē}%
+    \SubStep{i:}{ī}%
+    \SubStep{o:}{ō}%
+    \SubStep{u:}{ū}%
+    %
+    %short accented vowels
+    \SubStep{"a}{á}%
+    \SubStep{"e}{é}%
+    \SubStep{"i}{í}%
+    \SubStep{"o}{ó}%
+    \SubStep{"u}{ú}%
+    %
+    %accented syllabic liquids
+    \SubStep{"l.}{ĺ̥}%
+    \SubStep{"r.}{ŕ̥}%
+    \SubStep{"n.}{ń̥}%
+    \SubStep{"m.}{ḿ̥}%
+    %
+    %unaccented syllabic liquids
+    \SubStep{l.}{l̥}%
+    \SubStep{r.}{r̥}%
+    \SubStep{n.}{n̥}%
+    \SubStep{m.}{m̥}%
+    %
+    %semivowels
+    \IfSubStr{#2}{semivowel}%
+    {%true: write as i, u with breve below
+        \SubStep{y}{i̯}%
+        \SubStep{w}{u̯}%
+    }{%false: write as y, w
+    }%    
+    %
+    %
+    \IfSubStr{#2}{glottalic}%
+        {%
+            \IfSubStr{#2}{beekes}%
+            {%
+                \IfSubStr{#2}{uvular}%
+                {%
+                    \SubStep{gvh}{qʷʰ}%
+                    \SubStep{gv}{ˀqʷ}%
+                    \SubStep{kv}{qʷ}%
+                    \SubStep{g'h}{Kʰ}%
+                    \SubStep{g'}{ˀK}%
+                    \SubStep{k'}{K}%
+                    \SubStep{gh}{qʰ}%
+                    \SubStep{g}{ˀq}%
+                    \SubStep{k}{q}%
+                    \SubStep{K}{k}%
+                }%
+                {%
+                    \SubStep{gvh}{kʷʰ}%
+                    \SubStep{gv}{ˀkʷ}%
+                    \SubStep{kv}{kʷ}%
+                    \IfSubStr{#2}{circumflex}%
+                    {%
+                        \SubStep{g'h}{k̂ʰ}%
+                        \SubStep{g'}{ˀk̂}%
+                        \SubStep{k'}{k̂}%
+                    }%
+                    {%
+                        \SubStep{g'h}{ḱʰ}%
+                        \SubStep{g'}{ˀḱ}%
+                        \SubStep{k'}{ḱ}%
+                    }%
+                    \SubStep{gh}{kʰ}%
+                    \SubStep{g}{ˀk}%
+                    \SubStep{k}{k}%
+                }%
+                \SubStep{dh}{tʰ}%
+                \SubStep{d}{ˀt}%
+                \SubStep{t}{t}%
+                \SubStep{bh}{pʰ}%
+                \SubStep{b}{ˀp}%
+                \SubStep{p}{p}%                
+            }%
+            {%
+                \IfSubStr{#2}{uvular}%
+                {%
+                    \SubStep{gvh}{qʷʰ}%
+                    \SubStep{gv}{qʼʷ}%
+                    \SubStep{kv}{qʷ}%
+                    \SubStep{g'h}{Kʰ}%
+                    \SubStep{g'}{Kʼ}%
+                    \SubStep{k'}{K}%
+                    \SubStep{gh}{qʰ}%
+                    \SubStep{g}{qʼ}%
+                    \SubStep{k}{q}%
+                    \SubStep{K}{k}%
+                }%
+                {%
+                    \SubStep{gvh}{kʷʰ}%
+                    \SubStep{gv}{kʼʷ}%
+                    \SubStep{kv}{kʷ}%
+                    \IfSubStr{#2}{circumflex}%
+                    {%
+                        \SubStep{g'h}{k̂ʰ}%
+                        \SubStep{g'}{k̂ʼ}%
+                        \SubStep{k'}{k̂}%
+                    }%
+                    {%
+                        \SubStep{g'h}{ḱʰ}%
+                        \SubStep{g'}{ḱʼ}%
+                        \SubStep{k'}{ḱ}%
+                    }%
+                    \SubStep{gh}{kʰ}%
+                    \SubStep{g}{kʼ}%
+                    \SubStep{k}{k}%
+                }%
+                \SubStep{dh}{tʰ}%
+                \SubStep{d}{tʼ}%
+                \SubStep{t}{t}%
+                \SubStep{bh}{pʰ}%
+                \SubStep{b}{pʼ}%
+                \SubStep{p}{p}%   
+            }%
+        }%
+        {%
+            \SubStep{h}{ʰ}%
+            \SubStep{v}{ʷ}%
+            \IfSubStr{#2}{circumflex}%
+            {%
+                \SubStep{g'}{ĝ}%
+                \SubStep{k'}{k̂}%
+            }%
+            {%
+                \SubStep{g'}{ǵ}%
+                \SubStep{k'}{ḱ}%
+            }%
+        }%
+    %
+    %syllabic laryngeals
+    \SubStep{x1.}{h̥₁}%
+    \SubStep{x3.}{h̥₃}%
+    \SubStep{x5.}{h̥₅}%
+    %
+    %nonsyllabic laryngeals
+    \SubStep{x1}{h₁}%
+    \SubStep{x3}{h₃}%
+    \SubStep{x5}{h₅}%
+    %
+    %a-coloring laryngeals
+    \IfSubStr{#2}{h2}%
+    {%true: merge all into h2
+        \SubStep{x2.}{h̥₂}%
+        \SubStep{x4.}{h̥₂}%
+        \SubStep{xA.}{h̥₂}%
+        \SubStep{x2}{h₂}%
+        \SubStep{x4}{h₂}%
+        \SubStep{xA}{h₂}%
+    }{%false: distinguish h2, h4 and ha
+        \SubStep{x2.}{h̥₂}%
+        \SubStep{x4.}{h̥₄}%
+        \SubStep{xA.}{h̥ₐ}%
+        \SubStep{x2}{h₂}%
+        \SubStep{x4}{h₄}%
+        \SubStep{xA}{hₐ}%
+    }%
+    %
+    %generic laryngeal
+    \IfSubStr{#2}{hx}%
+    {%true: write as hx
+        \SubStep{xx.}{h̥ₓ}%
+        \SubStep{xx}{hₓ}%
+    }{%false: write as H
+        \SubStep{xx.}{H̥}%
+        \SubStep{xx}{H}%
+    }%
+    %
+    %initial asterisk
+    \IfSubStr{#2}{noasterisk}%
+    {%true
+        \apple%
+    }{%false
+        *\apple%
+    }%
+}%
+
+\endinput

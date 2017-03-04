@@ -1,0 +1,28 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{isolang}
+\RequirePackage{xstring}
+
+\ProcessOptions\relax
+
+%First argument is the ISO code/short form
+\newcommand\SubStep[2]{\expandafter\StrSubstitute\expandafter{\apple}{#1}{#2}[\apple]}%
+
+\newcommand\ISO[1]{%
+    \noexpandarg%
+    %input stuff
+    \StrSubstitute{#1}{``}{"}[\apple]%
+    \SubStep{''}{"}%
+    \SubStep{#1}{\MakeLowercase{#1}}%
+    %
+    %proto langs
+    \SubStep{pgmc}{Proto-Germanic *}%
+    %other
+    \SubStep{ang}{Old English}%
+    \SubStep{eng}{English}%
+    \SubStep{non}{Old Norse}%
+    \SubStep{lat}{Latin}%
+    \SubStep{txb}{Tocharian B}%
+    \SubStep{hit}{Hittite}%
+}%
+
+\endinput
