@@ -6,13 +6,15 @@
 
 %First argument is PIE word in Connie Notation
 %Second argument is a list of options (to be separated by commas, tho not technically necessary)
-%%uvular: assumes k' k kv -> k q qʷ (default: ḱ k kʷ) (conflict: circumflex)
-%%circumflex: writes k' as k̂ (default ḱ) (conflict: uvular)
-%%glottal_trad: assumes t d dh -> t t' d (default: t d dʰ) (conflict: glottal_beekes)
-%%glottal_beekes: assumes t d dh -> t ˀt tʰ (default: t d dʰ) (conflict: glottal_trad)
-%%semivowels: writes y w as i̯ u̯ (default: y w)
-%%xh: writes xx as Hhₓ (default: H)
-%%h2: writes x4 and x@ as h₂
+%semivowel: if true, write the semivowels as non-syllabic vowels i̯ u̯, else as y w 
+%glottalic: if true, assumes a glottalic framework, else assumes the traditional framework with voiced aspirates
+%beekes: assumes beekes' variant of the glottalic theory (preglottalization), else the traditional one (ejectives). REQUIRES glottalic
+%uvular: assumes the palatovelars were velar and the (labialized) velars were (labialized) uvular. REQUIRES glottalic
+%circumflex: writes palatovelars with a circumflex instead of an acute. CONFLICTS uvular
+%h2: merges all a-coloring laryngeals (h2, h4, ha) into h2
+%hx: writes the unknown laryngeal as hₓ instead of H 
+%noasterisk: omits the initial asterisk
+
 \newcommand\SubStep[2]{\expandafter\StrSubstitute\expandafter{\apple}{#1}{#2}[\apple]}%
 
 \newcommand\PIE[2]{%
