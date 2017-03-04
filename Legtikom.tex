@@ -1,16 +1,35 @@
-\documentclass[11pt,twoside,a4paper]{article}
+\documentclass[paper=6in:9in]{scrbook}
+%behind the scenes
+\usepackage{fontspec}
+\usepackage{color}
+\usepackage{calc}
 
-\usepackage{polyglossia}
-\setmainlanguage{english}
-\newfontfamily\englishfont[Script=Latin]{Charis SIL} \setromanfont{Charis SIL} \setsansfont{Charis SIL} \setmonofont{Charis SIL}
-\usepackage{lmodern}
+%looks
+\renewcommand*\sectfont{\normalcolor\bfseries}
+\usepackage[hidelinks]{hyperref}
 
-\title{Leǵtikóm}
+%tables
+\usepackage{tabu}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{float}
+\restylefloat{table}
+
+%font stuff
+\setmainfont[Ligatures=TeX]{Charis SIL}
+\newfontfamily\lib{Linux Libertine}
+
+%macros
+\usepackage{xebolpie}
+\newcommand{\pie}[1]{\PIE{#1}{circumflex, hx}}
+
+
+\title{\PIE{Leg'tik''om}{noasterisk, circumflex}}
 \author{A Proto-Indo-European Dictionary}
 \date{Author}
 
 \begin{document}
-
+\frontmatter
 \maketitle
 
 \newpage
@@ -18,19 +37,28 @@
 \tableofcontents
 \newpage
 
-\section{Preface}
+\chapter{Preface}
 
-\section{Abbreviations and Symbols}
+\chapter{Abbreviations and Symbols}
 
-\section{Introduction}
+\mainmatter
+\chapter{Introduction}
 
-\section{Dictionary}
+\chapter{Grammar}
 
-\subsection{Roots}
+\chapter{Dictionary}
+
+\section{Roots}
+
 
 \input{roots}
 
-\section{Bibliography}
+\section{Words}
+
+\backmatter
+\chapter{Index of Roots}
+
+\chapter{Bibliography}
 
 \input{bibliography}
 
