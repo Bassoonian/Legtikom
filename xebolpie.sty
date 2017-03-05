@@ -14,7 +14,7 @@
 %h2: merges all a-coloring laryngeals (h2, h4, ha) into h2
 %hx: writes the unknown laryngeal as hₓ instead of H 
 %noasterisk: omits the initial asterisk
-
+%returnvar: doesn't print, just returns the variable \apple
 \newcommand\SubStep[2]{\expandafter\StrSubstitute\expandafter{\apple}{#1}{#2}[\apple]}%
 
 \newcommand\PIE[2]{%
@@ -202,11 +202,16 @@
     }%
     %
     %initial asterisk
-    \IfSubStr{#2}{noasterisk}%
-    {%true
-        \apple%
-    }{%false
-        *\apple%
+    \IfSubStr{#2}{returnvar}%
+    {%
+    }%
+    {%
+	    \IfSubStr{#2}{noasterisk}%
+	    {%true
+	        \apple%
+	    }{%false
+	        *\apple%
+	    }%
     }%
 }%
 
