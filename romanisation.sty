@@ -1,0 +1,97 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{romanisation}
+\RequirePackage{xstring}
+
+\ProcessOptions\relax
+
+%This sty script romanises various scripts.
+%Usage: \rom{ISO-code}{text}
+
+%\newcommand\SubStep[2]{\expandafter\StrSubstitute\expandafter{\apple}{#1}{#2}[\apple]}%
+
+\newcommand\rom[2]{%
+    \noexpandarg%
+    %input stuff
+    \StrSubstitute{#1}{``}{"}[\apple]%
+    \SubStep{''}{"}%
+    %
+    %ANCIENT GREEK (grc)
+    \IfSubStr{#2}{grc}%
+    {%
+    	%Digraphs
+        \SubStep{γγ}{ng}%
+        \SubStep{γκ}{nk}%
+        \SubStep{γξ}{nx}%
+        \SubStep{γχ}{nch}%
+        \SubStep{αυ}{au}%
+        \SubStep{Αυ}{Au}%
+        \SubStep{ευ}{eu}%
+        \SubStep{Ευ}{Eu}%
+        \SubStep{ηυ}{ēu}%
+        \SubStep{Ηυ}{Ēu}%
+        \SubStep{ου}{ou}%
+        \SubStep{Ου}{Ou}%
+        \SubStep{υι}{ui}%
+        \SubStep{Υι}{Ui}%
+        \SubStep{ωυ}{ōu}%
+        \SubStep{Ωυ}{Ōu}%
+        %Others
+        \SubStep{Α}{A}%
+        \SubStep{α}{a}%
+        \SubStep{Β}{B}%
+        \SubStep{β}{b}%
+        \SubStep{ϐ}{b}%
+        \SubStep{Γ}{G}%
+        \SubStep{γ}{g}%
+        \SubStep{Δ}{D}%
+        \SubStep{δ}{d}%
+        \SubStep{Ε}{E}%
+        \SubStep{ε}{e}%
+        \SubStep{ϵ}{e}%
+        \SubStep{Ζ}{Z}%
+        \SubStep{ζ}{z}%
+        \SubStep{Η}{Ē}%
+        \SubStep{η}{ē}%
+        \SubStep{Θ}{Th}%
+        \SubStep{θ}{th}%
+        \SubStep{ϑ}{th}%
+        \SubStep{Ι}{I}%
+        \SubStep{ι}{i}%
+        \SubStep{Κ}{K}%
+        \SubStep{κ}{k}%
+        \SubStep{ϰ}{k}%
+        \SubStep{Λ}{L}%
+        \SubStep{λ}{l}%
+        \SubStep{Μ}{M}%
+        \SubStep{μ}{m}%
+        \SubStep{Ν}{N}%
+        \SubStep{ν}{n}%
+        \SubStep{Ξ}{X}%
+        \SubStep{ξ}{x}%
+        \SubStep{Ο}{O}%
+        \SubStep{ο}{o}%
+        \SubStep{Π}{P}%
+        \SubStep{π}{p}%
+        \SubStep{Ρ}{Rh}%
+        \SubStep{ρ}{rh}%
+        \SubStep{ϱ}{r}%
+        \SubStep{Σ}{S}%
+        \SubStep{σ}{s}%
+        \SubStep{ς}{s}%
+        \SubStep{Τ}{T}%
+        \SubStep{τ}{t}%
+        \SubStep{Υ}{Y}%
+        \SubStep{υ}{y}%
+        \SubStep{Φ}{Ph}%
+        \SubStep{φ}{ph}%
+        \SubStep{Χ}{Ch}%
+        \SubStep{χ}{ch}%
+        \SubStep{Ψ}{Ps}%
+        \SubStep{ψ}{ps}%
+        \SubStep{Ω}{Ō}%
+        \SubStep{ω}{ō}%
+        %To do: diacritics
+    }%
+}%
+
+\endinput
